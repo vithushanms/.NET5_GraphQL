@@ -1,2 +1,9 @@
 # .NET5_GraphQL
 Demonstration of developing GraphQL APIs using .NET 5 wit hot chocolate framework
+
+Run the program
+1. dotnet restore
+2. Docker-Compose up
+3. dotnet ef database update
+4. dotnet build
+5. dotnet run
