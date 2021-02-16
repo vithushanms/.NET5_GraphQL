@@ -19,13 +19,15 @@ namespace questionQL
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(
+            /*AddPooledDbContextFactory is method introduced in .NET 5 to handle parallel executions*/
+            services.AddPooledDbContextFactory<AppDbContext>(opt => opt.UseSqlServer(
                 _configuration.GetConnectionString("QuestionDb")
             ));
 
             services
             .AddGraphQLServer()
-            .AddQueryType<Query>();
+            .AddQueryType<Query>()
+            .AddProjections();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,11 +41,12 @@ namespace questionQL
 
             app.UseEndpoints(endpoints =>
             {
-                //adding graphql to the request pipeline
+                /*adding graphql to the request pipeline*/
                 endpoints.MapGraphQL();
             });
 
-            app.UseGraphQLVoyager(new GraphQLVoyagerOptions(){
+            app.UseGraphQLVoyager(new GraphQLVoyagerOptions()
+            {
                GraphQLEndPoint = _configuration["GraphQL:Endpont"],
                Path = _configuration["GraphQL:VoyagerEndpoint"]
             });
