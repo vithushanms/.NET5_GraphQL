@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using HotChocolate;
 
 namespace QuestionQL.Models
 {

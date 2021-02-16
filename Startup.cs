@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using QuestionQL.DataAccess;
 using QuestionQL.GrqphQL;
 using GraphQL.Server.Ui.Voyager;
+using QuestionQL.GrqphQL.Questions;
+using QuestionQL.GrqphQL.Answers;
 
 namespace questionQL
 {
@@ -27,7 +29,8 @@ namespace questionQL
             services
             .AddGraphQLServer()
             .AddQueryType<Query>()
-            .AddProjections();
+            .AddType<QuestionType>()
+            .AddType<AnswerType>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
