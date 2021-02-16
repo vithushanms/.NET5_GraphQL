@@ -3,7 +3,7 @@ Demonstration of developing GraphQL APIs using .NET 5 wit hot chocolate framewor
 
 Architecture
 --------------------------------
-[ArchitectureImage](https://github.com/vithushanms/.NET5_GraphQL/blob/main/Images/Architecture.png)
+![ArchitectureImage](https://github.com/vithushanms/.NET5_GraphQL/blob/main/Images/Architecture.png)
 
 Run the program
 --------------------------------
