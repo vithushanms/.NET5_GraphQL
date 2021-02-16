@@ -10,7 +10,7 @@ using QuestionQL.DataAccess;
 namespace questionQL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210215184709_Initial_Migration")]
+    [Migration("20210216051715_Initial_Migration")]
     partial class Initial_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,19 +31,19 @@ namespace questionQL.Migrations
                     b.Property<string>("AnswerString")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("QuestionQiestionId")
+                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("AnswerId");
 
-                    b.HasIndex("QuestionQiestionId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Answer");
                 });
 
             modelBuilder.Entity("QuestionQL.Models.Question", b =>
                 {
-                    b.Property<int>("QiestionId")
+                    b.Property<int>("QuestionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -54,7 +54,7 @@ namespace questionQL.Migrations
                     b.Property<string>("QuestionString")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("QiestionId");
+                    b.HasKey("QuestionId");
 
                     b.ToTable("QuestionDb");
                 });
@@ -63,7 +63,7 @@ namespace questionQL.Migrations
                 {
                     b.HasOne("QuestionQL.Models.Question", null)
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionQiestionId");
+                        .HasForeignKey("QuestionId");
                 });
 
             modelBuilder.Entity("QuestionQL.Models.Question", b =>

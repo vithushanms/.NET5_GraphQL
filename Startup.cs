@@ -1,12 +1,12 @@
-using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using QuestionQL.DataAccess;
+using QuestionQL.GrqphQL;
+using GraphQL.Server.Ui.Voyager;
 
 namespace questionQL
 {
@@ -16,11 +16,16 @@ namespace questionQL
         public Startup(IConfiguration configuration){
             _configuration = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(
                 _configuration.GetConnectionString("QuestionDb")
             ));
+
+            services
+            .AddGraphQLServer()
+            .AddQueryType<Query>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -34,10 +39,13 @@ namespace questionQL
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                //adding graphql to the request pipeline
+                endpoints.MapGraphQL();
+            });
+
+            app.UseGraphQLVoyager(new GraphQLVoyagerOptions(){
+               GraphQLEndPoint = _configuration["GraphQL:Endpont"],
+               Path = _configuration["GraphQL:VoyagerEndpoint"]
             });
         }
     }
