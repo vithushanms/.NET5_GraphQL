@@ -17,6 +17,10 @@ GrqphQL (query results)
 ---------------------------------
 http://localhost:5000/GraphQL/
 
+![QueryTool](https://github.com/vithushanms/.NET5_GraphQL/blob/main/Images/GraphQL-Query.png)
+
 GrqphQL-voyager (A visualisation of the entity design)
 ---------------------------------
 http://localhost:5000/graphql-voyager
+
+![GraphQLVoyager](https://github.com/vithushanms/.NET5_GraphQL/blob/main/Images/GrqphQL-Voyager.png)
